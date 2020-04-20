@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/static/xsl/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2019-12-03T18:44:06Z</responseDate>
+  <request verb="GetRecord" metadataPrefix="datacite" identifier="oai:zenodo.org:3490396">https://zenodo.org/oai2d</request>
+  <GetRecord>
+    <record>
+      <header>
+        <identifier>oai:zenodo.org:3490396</identifier>
+        <datestamp>2019-11-01T07:10:24Z</datestamp>
+      </header>
+      <metadata>
+        <resource xmlns="http://datacite.org/schema/kernel-4" xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4.1/metadata.xsd">
+          <identifier identifierType="DOI">10.5281/zenodo.3490396</identifier>
+          <creators>
+            <creator>
+              <creatorName>Tobias Weber</creatorName>
+              <nameIdentifier nameIdentifierScheme="ORCID" schemeURI="http://orcid.org/">0000-0003-1815-7042</nameIdentifier>
+              <affiliation>Tobias Weber</affiliation>
+            </creator>
+            <creator>
+                <creatorName nameType="Organizational">Leibniz Rechenzentrum</creatorName>
+            </creator>
+          </creators>
+          <titles>
+            <title>One Title in English, no params</title>
+          </titles>
+          <publisher>Zenodo</publisher>
+          <publicationYear>2019</publicationYear>
+          <subjects>
+            <subject subjectScheme="dewey">12 Some non-existant field of study</subject>
+            <subject schemeURI="https://wikidata.org/wiki">123-i-am-not-a-qid</subject>
+          </subjects>
+          <contributors>
+              <contributor contributorType="RightsHolder">
+                  <contributorName>Hammock Koch, Christina</contributorName>
+                  <nameIdentifier 
+                      nameIdentifierScheme="wikidata"
+                      schemeURI="https://www.wikidata.org/wiki/"
+                  >
+                      Q13500192
+                  </nameIdentifier>
+              </contributor>
+              <contributor contributorType="HostingInstitution">
+                  <contributorName nameType="Organizational">LRZ</contributorName>
+              </contributor>
+          </contributors>
+          <dates>
+            <date dateType="Updated" dateInformation="First revision">2019-10-15</date>
+            <date dateType="Updated" dateInformation="Second revision">2019-10-25</date>
+          </dates>
+          <language>en</language>
+          <resourceType resourceTypeGeneral="Text"/>
+          <alternateIdentifiers>
+            <alternateIdentifier alternateIdentifierType="url">https://zenodo.org/record/3490396</alternateIdentifier>
+          </alternateIdentifiers>
+          <relatedIdentifiers>
+            <relatedIdentifier relatedIdentifierType="DOI" relationType="IsVersionOf">10.5281/zenodo.3490395</relatedIdentifier>
+          </relatedIdentifiers>
+          <descriptions>
+            <description>Automated classification of metadata of research data by their discipline(s) of research can be used in scientometric research, by repository service providers, and in the context of research data aggregation services. Openly available metadata of the DataCite index for research data were used to compile a large training and evaluation set comprised of 609,524 records. This is the cleaned and vectorized version with a feature selection of small size.</description>
+            <description>Automated classification of metadata of research data by their discipline(s) of research can be used in scientometric research, by repository service providers, and in the context of research data aggregation services. Openly available metadata of the DataCite index for research data were used to compile a large training and evaluation set comprised of 609,524 records. This is the cleaned and vectorized version with a feature selection of small size.</description>
+            <description>Automated classification of metadata of research data by their discipline(s) of research can be used in scientometric research, by repository service providers, and in the context of research data aggregation services. Openly available metadata of the DataCite index for research data were used to compile a large training and evaluation set comprised of 609,524 records. This is the cleaned and vectorized version with a feature selection of small size.</description>
+            <description/>
+          </descriptions>
+        </resource>
+      </metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>

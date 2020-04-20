@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/static/xsl/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2019-12-03T18:44:06Z</responseDate>
+  <request verb="GetRecord" metadataPrefix="datacite" identifier="oai:zenodo.org:3490396">https://zenodo.org/oai2d</request>
+  <GetRecord>
+    <record>
+      <header>
+        <identifier>oai:zenodo.org:3490396</identifier>
+        <datestamp>2019-11-01T07:10:24Z</datestamp>
+      </header>
+      <metadata>
+        <resource xmlns="http://datacite.org/schema/kernel-4" xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4.1/metadata.xsd">
+          <identifier identifierType="DOI">10.5281/zenodo.3490396</identifier>
+          <creators>
+            <creator>
+              <creatorName>Uwiragiye F Pie X</creatorName>
+              <nameIdentifier nameIdentifierScheme="ORCID" schemeURI="http://orcid.org/">0000-0003-0084-832X</nameIdentifier>
+              <affiliation>Tobias Weber</affiliation>
+            </creator>
+          </creators>
+          <titles>
+            <title>Several titles, none with params</title>
+            <title>Einige Titel, keiner mit Parametern</title>
+            <title></title>
+          </titles>
+          <publisher>Zenodo</publisher>
+          <publicationYear>2019</publicationYear>
+          <subjects>
+            <subject>datacite</subject>
+            <subject>machine learning</subject>
+            <subject>classification of metadata</subject>
+            <subject subjectScheme="url">https://dewey.info/</subject>
+            <subject subjectScheme="url">https://dewey.info/</subject>
+          </subjects>
+          <dates>
+            <date dateType="Updated">2019-10-15</date>
+            <date dateType="Updated">2019-10-25</date>
+          </dates>
+          <resourceType resourceTypeGeneral="Image"/>
+          <alternateIdentifiers>
+            <alternateIdentifier alternateIdentifierType="url">https://zenodo.org/record/3490396</alternateIdentifier>
+          </alternateIdentifiers>
+          <relatedIdentifiers>
+            <relatedIdentifier relatedIdentifierType="DOI" relationType="Compiles" resourceTypeGeneral="Dataset">10.5281/zenodo.3490329</relatedIdentifier>
+            <relatedIdentifier relatedIdentifierType="DOI" relationType="IsVersionOf">10.5281/zenodo.3490395</relatedIdentifier>
+          </relatedIdentifiers>
+          <formats>
+              <format>application/json</format>
+              <format>something/Imadeup</format>
+          </formats>
+          <rightsList>
+            <rights>Creative Commons Attribution 4.0 International</rights>
+            <rights rightsURI="info:eu-repo/semantics/openAccess">Open Access</rights>
+            <rights rightsURI="https://doesnotexist.com">Open Access</rights>
+            <rights rightsURI="https://somethingwentterriblywrong.com">Open Access</rights>
+          </rightsList>
+          <descriptions>
+            <description descriptionType="Abstract">&lt;p&gt;Automated classification of metadata of research data by their discipline(s) of research can be used in scientometric research, by repository service providers, and in the context of research data aggregation services. Openly available metadata of the DataCite index for research data were used to compile a large training and evaluation set comprised of 609,524 records. This is the cleaned and vectorized version with a feature selection of small size.&lt;/p&gt;</description>
+          </descriptions>
+
+        </resource>
+      </metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>

@@ -1,0 +1,186 @@
+{
+    "aggregations": {
+        "access_right": {
+            "buckets": [
+                {
+                    "doc_count": 1,
+                    "key": "open"
+                }
+            ],
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0
+        },
+        "communities": {
+            "buckets": [],
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0
+        },
+        "file_type": {
+            "buckets": [
+                {
+                    "doc_count": 1,
+                    "key": "gz"
+                }
+            ],
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0
+        },
+        "keywords": {
+            "buckets": [
+                {
+                    "doc_count": 1,
+                    "key": "classification of metadata"
+                },
+                {
+                    "doc_count": 1,
+                    "key": "datacite"
+                },
+                {
+                    "doc_count": 1,
+                    "key": "machine learning"
+                }
+            ],
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0
+        },
+        "type": {
+            "buckets": [
+                {
+                    "doc_count": 1,
+                    "key": "dataset",
+                    "subtype": {
+                        "buckets": [],
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 0
+                    }
+                }
+            ],
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0
+        }
+    },
+    "hits": {
+        "hits": [
+            {
+                "conceptdoi": "10.5281/zenodo.3490395",
+                "conceptrecid": "3490395",
+                "created": "2019-10-15T10:39:13.545063+00:00",
+                "doi": "10.5281/zenodo.3490396",
+                "files": [
+                    {
+                        "bucket": "7c4aaea9-0290-47ab-90e6-f5570ddcc0a8",
+                        "checksum": "md5:037c8d56988886e7209f45abe0855a9a",
+                        "key": "md001.pdf",
+                        "links": {
+                            "self": "https://zenodo.org/api/files/7c4aaea9-0290-47ab-90e6-f5570ddcc0a8/md001.pdf"
+                        },
+                        "size": 348081,
+                        "type": "pdf"
+                    }
+                ],
+                "id": 3490396,
+                "links": {
+                    "badge": "https://zenodo.org/badge/doi/10.5281/zenodo.3490396.svg",
+                    "bucket": "https://zenodo.org/api/files/7c4aaea9-0290-47ab-90e6-f5570ddcc0a8",
+                    "conceptbadge": "https://zenodo.org/badge/doi/10.5281/zenodo.3490395.svg",
+                    "conceptdoi": "https://doi.org/10.5281/zenodo.3490395",
+                    "doi": "https://doi.org/10.5281/zenodo.3490396",
+                    "html": "https://zenodo.org/record/3490396",
+                    "latest": "https://zenodo.org/api/records/3490396",
+                    "latest_html": "https://zenodo.org/record/3490396",
+                    "self": "https://zenodo.org/api/records/3490396"
+                },
+                "metadata": {
+                    "access_right": "open",
+                    "access_right_category": "success",
+                    "creators": [
+                        {
+                            "affiliation": "Tobias Weber",
+                            "name": "Tobias Weber",
+                            "orcid": "0000-0003-1815-7041"
+                        }
+                    ],
+                    "description": "<p>Automated classification of metadata of research data by their discipline(s) of research can be used in scientometric research, by repository service providers, and in the context of research data aggregation services. Openly available metadata of the DataCite index for research data were used to compile a large training and evaluation set comprised of 609,524 records. This is the cleaned and vectorized version with a feature selection of small size.</p>",
+                    "doi": "10.5281/zenodo.3490396",
+                    "keywords": [
+                        "datacite",
+                        "machine learning",
+                        "classification of metadata"
+                    ],
+                    "license": {
+                        "id": "CC-BY-4.0"
+                    },
+                    "publication_date": "2019-10-15",
+                    "related_identifiers": [
+                        {
+                            "identifier": "10.5281/zenodo.3490329",
+                            "relation": "compiles",
+                            "resource_type": "dataset",
+                            "scheme": "doi"
+                        },
+                        {
+                            "identifier": "10.5281/zenodo.3490395",
+                            "relation": "isVersionOf",
+                            "scheme": "doi"
+                        }
+                    ],
+                    "relations": {
+                        "version": [
+                            {
+                                "count": 1,
+                                "index": 0,
+                                "is_last": true,
+                                "last_child": {
+                                    "pid_type": "recid",
+                                    "pid_value": "3490396"
+                                },
+                                "parent": {
+                                    "pid_type": "recid",
+                                    "pid_value": "3490395"
+                                }
+                            }
+                        ]
+                    },
+                    "resource_type": {
+                        "title": "Dataset",
+                        "type": "dataset"
+                    },
+                    "subjects": [
+                        {
+                            "identifier": "https://dewey.info/",
+                            "scheme": "url",
+                            "term": "004 Data processing & computer science"
+                        },
+                        {
+                            "identifier": "https://dewey.info/",
+                            "scheme": "url",
+                            "term": "020 Library & information sciences"
+                        }
+                    ],
+                    "title": "s-sized Training and Evaluation  Data for Publication \"Using Supervised Learning to Classify Metadata of Research Data by Discipline of Research\""
+                },
+                "owners": [
+                    64749
+                ],
+                "revision": 6,
+                "stats": {
+                    "downloads": 6.0,
+                    "unique_downloads": 6.0,
+                    "unique_views": 26.0,
+                    "version_downloads": 6.0,
+                    "version_unique_downloads": 6.0,
+                    "version_unique_views": 26.0,
+                    "version_views": 37.0,
+                    "version_volume": 11090230122.0,
+                    "views": 37.0,
+                    "volume": 11090230122.0
+                },
+                "updated": "2020-01-24T19:23:42.183898+00:00"
+            }
+        ],
+        "total": 1
+    },
+    "links": {
+        "self": "https://zenodo.org/api/records/?sort=bestmatch&q=recid%3A3490396&page=1&size=10"
+    }
+}

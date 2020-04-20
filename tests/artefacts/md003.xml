@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/static/xsl/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2019-12-03T18:44:06Z</responseDate>
+  <request verb="GetRecord" metadataPrefix="datacite" identifier="oai:zenodo.org:3490396">https://zenodo.org/oai2d</request>
+  <GetRecord>
+    <record>
+      <header>
+        <identifier>oai:zenodo.org:3490396</identifier>
+        <datestamp>2019-11-01T07:10:24Z</datestamp>
+      </header>
+      <metadata>
+        <resource xmlns="http://datacite.org/schema/kernel-4" xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4.1/metadata.xsd">
+          <identifier identifierType="DOI">10.5281/zenodo.3490396</identifier>
+          <creators>
+            <creator>
+              <creatorName>Tobias Weber</creatorName>
+              <nameIdentifier>0000-0003-1815-7041</nameIdentifier>
+            </creator>
+            <creator>
+                <creatorName>Weber, Tobias</creatorName>
+            </creator>
+          </creators>
+          <titles>
+            <title titleType="TranslatedTitle">survey.csv  </title>
+          </titles>
+          <publisher>Zenodo</publisher>
+          <publicationYear>2019</publicationYear>
+          <subjects>
+            <subject>datacite</subject>
+            <subject>machine learning</subject>
+            <subject>classification of metadata</subject>
+            <subject subjectScheme="url">https://dewey.info/</subject>
+            <subject subjectScheme="url">https://dewey.info/</subject>
+            <subject></subject>
+          </subjects>
+          <contributors>
+            <contributor contributorType="Editor">
+              <contributorName nameType="Personal">Weber, Tobias</contributorName>
+              <nameIdentifier nameIdentifierScheme="ORCID">0000-0003-1815-7041</nameIdentifier>
+              <nameIdentifier schemeURI="https://ieeexplore.ieee.org/author/">37086586368</nameIdentifier>
+          5   <affiliation>Leibniz Supercomputing Centre</affiliation>
+            </contributor>
+          </contributors>
+          <dates>
+            <date>2019-10-15</date>
+          </dates>
+          <language xml:lang="en">English</language>
+          <resourceType resourceTypeGeneral="Text"/>
+          <alternateIdentifiers>
+            <alternateIdentifier alternateIdentifierType="url">https://zenodo.org/record/3490396</alternateIdentifier>
+          </alternateIdentifiers>
+          <relatedIdentifiers>
+            <relatedIdentifier relatedIdentifierType="DOI" relationType="Cites" resourceTypeGeneral="Dataset">10.5281/zenodo.3490329</relatedIdentifier>
+            <relatedIdentifier relatedIdentifierType="DOI" relationType="HasMetadata">10.5281/zenodo.3490395</relatedIdentifier>
+            <relatedIdentifier relatedIdentifierType="DOI" relationType="HasMetadata" schemeURI="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4.1/metadata.xsd" relatedMetadataScheme="XSD">10.5281/zenodo.3490396</relatedIdentifier>
+          </relatedIdentifiers>
+          <sizes>
+              <size>120 records</size>
+              <size>12 GB</size>
+          </sizes>
+          <formats>
+              <format>application/json</format>
+          </formats>
+          <version xml:lang="en">34</version>
+          <rightsList>
+            <rights rightsURI="info:eu-repo/semantics/openAccess" rightsIdentifierScheme="spdx">Open Access</rights>
+              <rights rightsURI="http://thisurl does not exists" schemeURI="https://spdxx.org/licenses">Creative Commons Attribution 4.0 International</rights>
+            <rights rightsURI="info:eu-repo/semantics/openAccess" rightsIdentifierScheme="spdx" rightsIdentifier="Idonotexistasarightsidentifier">Open Access</rights>
+            <rights/>
+          </rightsList>
+          <descriptions>
+              <description descriptionType="Abstract">Dies ist ein deutscher Abstrakt,
+                  auch wenn Worte wie check oder evaluation vorkommen. Im Endeffekt zählt hoffentlich die Mehrzahl der Worte. Hier ein weiterer Satz. Und noch einer. Dieser Abstract muss über 300 Worte lang werden. Dann schlägt der Test fehl. So richtig fehl. Dann läuten die Alarmglocken und es geht jählings hinab in das Höllenreich der niedrigen Metrics scores. So viele kleine Wörter fehlen noch,
+              daher ein kleines Eigenzitat: 
+              Lebenszyklus-Modelle für Forschungsdaten sind oft abstrakt und einfach. Hierin liegt die Gefahr, ein zu einfaches Bild der komplexen Forschungsdatenlandschaft zu zeichnen. Die Analyse von 90 dieser Modelle führt zu zwei Ansätzen, die Qualität dieser Modelle zu bewerten. Die Uneinheitlichkeit in der Terminologie erschwert einen direkten Vergleich zwischen den Modellen, wohingegen eine empirische Evaluierung der Modelle in Reichweite liegt.
+
+              Lebenszyklus-Modelle für Forschungsdaten sind oft abstrakt und einfach. Hierin liegt die Gefahr, ein zu einfaches Bild der komplexen Forschungsdatenlandschaft zu zeichnen. Die Analyse von 90 dieser Modelle führt zu zwei Ansätzen, die Qualität dieser Modelle zu bewerten. Die Uneinheitlichkeit in der Terminologie erschwert einen direkten Vergleich zwischen den Modellen, wohingegen eine empirische Evaluierung der Modelle in Reichweite liegt.
+
+              Lebenszyklus-Modelle für Forschungsdaten sind oft abstrakt und einfach. Hierin liegt die Gefahr, ein zu einfaches Bild der komplexen Forschungsdatenlandschaft zu zeichnen. Die Analyse von 90 dieser Modelle führt zu zwei Ansätzen, die Qualität dieser Modelle zu bewerten. Die Uneinheitlichkeit in der Terminologie erschwert einen direkten Vergleich zwischen den Modellen, wohingegen eine empirische Evaluierung der Modelle in Reichweite liegt.
+
+              Lebenszyklus-Modelle für Forschungsdaten sind oft abstrakt und einfach. Hierin liegt die Gefahr, ein zu einfaches Bild der komplexen Forschungsdatenlandschaft zu zeichnen. Die Analyse von 90 dieser Modelle führt zu zwei Ansätzen, die Qualität dieser Modelle zu bewerten. Die Uneinheitlichkeit in der Terminologie erschwert einen direkten Vergleich zwischen den Modellen, wohingegen eine empirische Evaluierung der Modelle in Reichweite liegt.
+          </description>
+
+            <description descriptionType="Other">Python, tensorflow, ipython this is English. Methods are important. See our paper on importance of methods.</description>
+            <description>Tralala</description>
+          </descriptions>
+        </resource>
+      </metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>
