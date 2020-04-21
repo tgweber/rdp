@@ -96,7 +96,7 @@ def test_blank_metadata():
 @mock.patch('requests.get', side_effect=mocked_requests_get)
 def test_service_oaipmh(mock_get):
     oaipmh = OaipmhService("https://zenodo.org/oai2d", "oai:zenodo.org:")
-    md = oaipmh.get_record("3490396", "datacite")
+    md = oaipmh.get_metadata("3490396", "datacite")
     assert md.pid == "10.5281/zenodo.3490396"
 
 # Checks implemented functionality of the rest-zenodo service
@@ -104,14 +104,14 @@ def test_service_oaipmh(mock_get):
 def test_service_rest_zenodo(mock_get):
     rest = ZenodoRestService("https://zenodo.org/api")
     data_bundle = Bundle()
-    for f in rest.get_files("3490396"):
-        data_bundle.put(f.source, f)
+    for f in rest.get_data("3490396"):
+        data_bundle.put("abc", f)
     assert len(data_bundle) == 1
-    first = \
-        data_bundle.get("https://zenodo.org/api/files/7c4aaea9-0290-47ab-90e6-f5570ddcc0a8/md001.pdf")
+    first = data_bundle.get("abc")
     assert first.type == "application/pdf"
-    assert re.search(r"introduction", str(first), re.IGNORECASE)
     assert first.encoding is None
+    assert re.search(r"introduction", first.text, re.IGNORECASE)
+
 
 # Checks the functionality of an unspecified RDP
 def test_rdp_unspecified():

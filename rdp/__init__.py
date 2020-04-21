@@ -29,7 +29,7 @@ class Rdp(object):
     """
     def __init__(self, pid):
         self.pid = pid
-        self._data = Bundle()
+        self._data = []
         self._metadata = Bundle()
         self._services = ServiceBundle()
 
@@ -43,11 +43,8 @@ class Rdp(object):
             Bundle of Data objects
         """
         if len(self._data) < 1:
-            try:
-                for f in self._services.get_data(self.pid):
-                    self._data.put(f.source, f)
-            except TypeError:
-                return None
+            for f in self._services.get_data(self.pid):
+                self._data.append(f)
         return self._data
 
     @property
@@ -111,10 +108,10 @@ class ZenodoRdp(Rdp):
        )
 
     @property
-    def data(self) -> Bundle:
+    def data(self):
         if len(self._data) < 1:
             for f in self._services.get_data(self.zenodo_id):
-                self._data.put(f.source, f)
+                self._data.append(f)
         return self._data
 
     @property

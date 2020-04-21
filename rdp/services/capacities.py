@@ -25,5 +25,5 @@ class RetrieveMetadata(ServiceCapacity):
 class RetrieveData(ServiceCapacity):
     """ Capacity to download data given an identifier
 
-        The service must provide get_data(identifier: str) -> Generator[Data, None, None]
+        The service must provide get_files(identifier: str) -> Generator[Data, None, None]
     """

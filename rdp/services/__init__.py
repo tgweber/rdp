@@ -11,8 +11,8 @@ from typing import Generator
 
 from rdp.services.capacities import RetrieveMetadata, RetrieveData, ServiceCapacity
 from rdp.metadata.factory import MetadataFactory, Metadata
-from rdp.data import DataFactory, Data
-from rdp.util import Bundle
+from rdp.data import FileDataFactory, Data
+from rdp.util import Bundle, LazyFile
 
 class Service(object):
     """ Base class + interface for Services as a component of RDPS
@@ -67,7 +67,7 @@ class ServiceBundle(Bundle):
         """
         for key, service in self.payload.items():
             if service.can(RetrieveMetadata()):
-                return service.get_record(identifier, scheme)
+                return service.get_metadata(identifier, scheme)
         return None
 
     def get_data(self, identifier) -> Generator[Data, None, None]:
@@ -85,7 +85,7 @@ class ServiceBundle(Bundle):
         """
         for key, service in self.payload.items():
             if service.can(RetrieveData()):
-                return service.get_files(identifier)
+                return service.get_data(identifier)
         return None
 
 ################################################################################
@@ -117,7 +117,7 @@ class OaipmhService(Service):
     def protocol(self):
         return "oai-pmh"
 
-    def get_record(self, identifier, metadataPrefix="datacite") -> Metadata:
+    def get_metadata(self, identifier, metadataPrefix="datacite") -> Metadata:
         """ OAI-PMH GetRecord request to retrieve metadata for the RDP in format
             specified by metadataPrefix
 
@@ -158,7 +158,11 @@ class ZenodoRestService(Service):
     def protocol(self):
         return "zenodo-rest"
 
-    def get_files(self, zenodoId) -> Generator[Data, None, None]:
+    def download(source:str) -> bytes:
+        r = requests.get(source)
+        return r.content
+
+    def get_data(self, zenodoId) -> Generator[Data, None, None]:
         """ Yields all Data objects of the RDP retrievable by the zenodo API
 
         Parameters
@@ -179,4 +183,7 @@ class ZenodoRestService(Service):
         if restJson["hits"]["total"] != 1:
             raise ValueError("{} does not unambiguously identify a zenodo record".format(zenodoId))
         for data_item in restJson["hits"]["hits"][0]["files"]:
-            yield DataFactory.create(data_item["links"]["self"])
+            yield FileDataFactory.create(
+                LazyFile(data_item["links"]["self"], ZenodoRestService.download)
+            )
+

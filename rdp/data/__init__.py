@@ -7,12 +7,14 @@
 #
 ################################################################################
 import csv
-import os
 import re
 import requests
 import tempfile
-from textract import process
 from mimetypes import guess_type
+from textract import process
+from textract.exceptions import ExtensionNotSupported
+
+from rdp.util import LazyFile
 
 class Data(object):
     """ Base class and interface for Data as components of RDPs
@@ -22,54 +24,50 @@ class Data(object):
     download() -> None
         Downloads the data item (will be removed on object deletion)
     """
-    def __init__(self, source):
-        self.source = source
-        self.downloaded = False
-        self.text = None
-        (self.type, self.encoding) = guess_type(source)
+    def __init__(self):
+        self.static = True
 
-    def __del__(self):
-        pass
-        if self.downloaded:
-            os.unlink(self.tmpfile)
-
-    def download(self) -> None:
-        """ Downloads the data item (will be removed on object deletion)
+    @property
+    def text(self):
+        """ Returns the data as text
         """
-        (self.fd, self.tmpfile) = tempfile.mkstemp(suffix=self.source.split("/")[-1])
-        r = requests.get(self.source)
-        os.write(self.fd, r.content)
-        os.close(self.fd)
-        self.downloaded = True
+        raise NotImplementedError("Must be implemented by subclass")
 
-    def __str__(self):
-        if not self.downloaded:
-            self.download()
-        if self.text is None:
+################################################################################
+# FILE-BASED DATA (INTERFACE + FACTORY)
+################################################################################
+class FileData(Data):
+    """ Base class and fall back for Data based on files
+    """
+    def __init__(self, lazyFile):
+        Data.__init__(self)
+        self.file = lazyFile
+        (self.type, self.encoding) = guess_type(self.file.source)
+
+    @property
+    def text(self):
+        try:
+            return re.sub(r"([A-Z]{1})\s+([A-Z]{5,})",
+                               r"\1\2",
+                               process(self.file.loc).decode("utf-8")
+                              )
+        except ExtensionNotSupported:
+            # textextract does not support this ending, so we consider it a textfile
             try:
-                self.text = re.sub(r"([A-Z]{1})\s+([A-Z]{5,})",
-                                   r"\1\2",
-                                   process(self.tmpfile).decode("utf-8")
-                                  )
-            except ExtensionNotSupported:
-                # textextract does not support this ending, so we consider it
-                # just a textfile
-                try:
-                    with open(self.tmpfile, "r") as f:
-                        self.text = f.read()
-                except Exception:
-                    self.text = None
-        return self.text
+                with open(self.file.loc, "r") as f:
+                    return f.read()
+            except Exception:
+                return None
 
-class DataFactory(object):
-    """ Factory for Data
+class FileDataFactory(object):
+    """ Factory for FileData
 
     Methods
     -------
-    create(source) -> Data
-        Factory method returning a Data object appropriate for the specified source
+    create(lazyFile: LazyFile) -> FileData
+        Factory method returning a FileData object appropriate for the source
     """
-    def create(source):
+    def create(lazyFile: LazyFile) -> FileData:
         """ Creats a Data object appropriate for the specified source
 
         Parameters
@@ -81,16 +79,16 @@ class DataFactory(object):
         -------
         Data: The created Data object
         """
-        (file_type, encoding) = guess_type(source)
-        # TODO handle zipped/archives
-        if file_type == "text/csv":
-            return CSVData(source)
-        return Data(source)
+
+        (ftype, encoding) = guess_type(lazyFile.source)
+        if ftype == "text/csv":
+            return CSVData(lazyFile)
+        return FileData(lazyFile)
 
 ################################################################################
-# SPECIFIC DATA IMPLEMENTATIONS
+# SPECIFIC FILE-BASED DATA IMPLEMENTATIONS
 ################################################################################
-class CSVData(Data):
+class CSVData(FileData):
     """ Comma-separated Data object
 
     Attributes
@@ -100,36 +98,24 @@ class CSVData(Data):
     rows: list of dicts
         List of key-value pairs for each row, keys are column headers
     """
-    def __init__(self, source):
-        super().__init__(source)
+    def __init__(self, lazyFile):
+        FileData.__init__(self, lazyFile)
         self._header = []
         self._rows = []
 
     def _read_csv(self):
-        if not self._rows:
-            with open(self.tmpfile, "r") as f:
+        if len(self._header) == 0:
+            with open(self.file.loc, "r") as f:
                 reader = csv.reader(f, skipinitialspace=True)
                 self._header = next(reader)
                 self._rows = [dict(zip(self.header, row)) for row in reader]
 
-    def _read_csv_header(self):
-        if not self._header:
-            with open(self.tmpfile, "r") as f:
-                reader = csv.reader(f, skipinitialspace=True)
-                self._header = next(reader)
-
-    def _check_or_download(self):
-        if not self.downloaded:
-            self.download()
-
     @property
     def header(self):
-        self._check_or_download()
-        self._read_csv_header()
+        self._read_csv()
         return self._header
 
     @property
     def rows(self):
-        self._check_or_download()
         self._read_csv()
         return self._rows
