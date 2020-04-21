@@ -9,6 +9,7 @@
 import requests
 from typing import Generator
 
+from rdp.services.capacity import RetrieveMetadata, RetrieveData, ServiceCapacity
 from rdp.metadata.factory import MetadataFactory, Metadata
 from rdp.data import DataFactory, Data
 from rdp.util import Bundle
@@ -30,10 +31,17 @@ class Service(object):
     """
     def __init__(self, endpoint):
         self.endpoint = endpoint
+        self.serviceCapacities = []
 
     @property
     def protocol(self):
         raise NotImplementedError("Protocol must be implemented by all subclasses of Services")
+
+    def can(self, capacity: ServiceCapacity) -> bool:
+        for sc in self.serviceCapacities:
+            if isinstance(capacity, sc):
+                return True
+        return False
 
 class ServiceBundle(Bundle):
     """ Collection of services with methods to select a service best fit for a task
@@ -54,9 +62,8 @@ class ServiceBundle(Bundle):
         Metadata
             Metadata object for RDP in format specified by scheme
         """
-
         for key, service in self.payload.items():
-            if service.protocol == "oai-pmh":
+            if service.can(RetrieveMetadata()):
                 return service.get_record(identifier, scheme)
         return None
 
@@ -74,7 +81,7 @@ class ServiceBundle(Bundle):
             Data objects for an RDP
         """
         for key, service in self.payload.items():
-            if service.protocol == "zenodo-rest":
+            if service.can(RetrieveData()):
                 return service.get_files(identifier)
         return None
 
@@ -101,6 +108,7 @@ class OaipmhService(Service):
     def __init__(self, endpoint, identifierPrefix=""):
         super(OaipmhService, self).__init__(endpoint)
         self.identifierPrefix = identifierPrefix
+        self.serviceCapacities.append(RetrieveMetadata)
 
     @property
     def protocol(self):
@@ -141,6 +149,7 @@ class ZenodoRestService(Service):
     """
     def __init__(self, endpoint):
         super(ZenodoRestService, self).__init__(endpoint)
+        self.serviceCapacities.append(RetrieveData)
 
     @property
     def protocol(self):
