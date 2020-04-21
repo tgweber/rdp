@@ -3,9 +3,9 @@
 #
 # Apache 2.0 License
 #
-# This file contains all RDP-related tests
+# This file contains all capacity-related tests
 #
-################################################################################
+###############################################################################
 
 from rdp.services.capacities import RetrieveData, RetrieveMetadata
 

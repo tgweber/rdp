@@ -46,6 +46,9 @@ class Service(object):
 class ServiceBundle(Bundle):
     """ Collection of services with methods to select a service best fit for a task
     """
+    def __init__(self, credentials=[]):
+        Bundle.__init__(self)
+        self.credentials = credentials
 
     def get_metadata(self, identifier, scheme) -> Metadata:
         """ Get a metadata object for the RDP
@@ -106,7 +109,7 @@ class OaipmhService(Service):
         specified by metadataPrefix
     """
     def __init__(self, endpoint, identifierPrefix=""):
-        super(OaipmhService, self).__init__(endpoint)
+        Service.__init__(self, endpoint)
         self.identifierPrefix = identifierPrefix
         self.serviceCapacities.append(RetrieveMetadata)
 
@@ -148,7 +151,7 @@ class ZenodoRestService(Service):
         Yields all Data objects of the RDP retrievable by the zenodo API
     """
     def __init__(self, endpoint):
-        super(ZenodoRestService, self).__init__(endpoint)
+        Service.__init__(self, endpoint)
         self.serviceCapacities.append(RetrieveData)
 
     @property
