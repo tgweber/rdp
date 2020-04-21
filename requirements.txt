@@ -1,3 +1,4 @@
+pypdf2
 pytest
 pytest-cov
 requests

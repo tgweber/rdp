@@ -13,6 +13,7 @@ import tempfile
 from mimetypes import guess_type
 from textract import process
 from textract.exceptions import ExtensionNotSupported
+from PyPDF2 import PdfFileReader
 
 from rdp.util import LazyFile
 
@@ -83,6 +84,8 @@ class FileDataFactory(object):
         (ftype, encoding) = guess_type(lazyFile.source)
         if ftype == "text/csv":
             return CSVData(lazyFile)
+        if ftype == "application/pdf":
+            return PDFData(lazyFile)
         return FileData(lazyFile)
 
 ################################################################################
@@ -119,3 +122,17 @@ class CSVData(FileData):
     def rows(self):
         self._read_csv()
         return self._rows
+
+class PDFData(FileData):
+    """ Portable Document File Data
+
+    numPages: int
+        Number of pages
+    """
+    def __init__(self, lazyFile):
+        FileData.__init__(self, lazyFile)
+        self.pdf = PdfFileReader(open(self.file.loc, "rb"))
+
+    @property
+    def numPages(self):
+        return self.pdf.getNumPages()

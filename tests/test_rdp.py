@@ -111,6 +111,7 @@ def test_service_rest_zenodo(mock_get):
     assert first.type == "application/pdf"
     assert first.encoding is None
     assert re.search(r"introduction", first.text, re.IGNORECASE)
+    assert first.numPages == 11
 
 
 # Checks the functionality of an unspecified RDP
