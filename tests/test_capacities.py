@@ -7,7 +7,7 @@
 #
 ################################################################################
 
-from rdp.services.capacity import RetrieveData, RetrieveMetadata
+from rdp.services.capacities import RetrieveData, RetrieveMetadata
 
 def test_capacity_description():
     cap = RetrieveData()

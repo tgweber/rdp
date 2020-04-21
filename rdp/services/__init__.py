@@ -9,7 +9,7 @@
 import requests
 from typing import Generator
 
-from rdp.services.capacity import RetrieveMetadata, RetrieveData, ServiceCapacity
+from rdp.services.capacities import RetrieveMetadata, RetrieveData, ServiceCapacity
 from rdp.metadata.factory import MetadataFactory, Metadata
 from rdp.data import DataFactory, Data
 from rdp.util import Bundle
