@@ -27,3 +27,9 @@ class RetrieveData(ServiceCapacity):
 
         The service must provide get_files(identifier: str) -> Generator[Data, None, None]
     """
+
+class RetrieveDataHttpHeaders(ServiceCapacity):
+    """ Capacity to retrieve the HTTP headers for each data item of a RDP given an identifier
+
+        The service must provide get_headers(identifier: str) -> Generator[Dict, None, None]
+    """

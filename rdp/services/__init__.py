@@ -7,9 +7,13 @@
 #
 ################################################################################
 import requests
-from typing import Generator
+from typing import Generator, Dict, List
 
-from rdp.services.capacities import RetrieveMetadata, RetrieveData, ServiceCapacity
+from rdp.services.capacities import \
+    RetrieveDataHttpHeaders, \
+    RetrieveMetadata, \
+    RetrieveData, \
+    ServiceCapacity
 from rdp.metadata.factory import MetadataFactory, Metadata
 from rdp.data import FileDataFactory, Data
 from rdp.util import Bundle, LazyFile
@@ -32,6 +36,7 @@ class Service(object):
     def __init__(self, endpoint):
         self.endpoint = endpoint
         self.serviceCapacities = []
+        self.credentials = {}
 
     @property
     def protocol(self):
@@ -43,12 +48,33 @@ class Service(object):
                 return True
         return False
 
+    def needs_credentials(self) -> str:
+        """ returns a string representation of the needed
+            credentials (classname). None if no credentials needed.
+        """
+        return None
+
+    def inject_credentials(self, credentials) -> None:
+        """ allows to inject the credentials at run time into
+            the credentials dictionary
+            (subclasses have to retrieve them there)
+        """
+        self.credentials[credentials.__name__] = credentials
+
 class ServiceBundle(Bundle):
     """ Collection of services with methods to select a service best fit for a task
     """
     def __init__(self, credentials=[]):
         Bundle.__init__(self)
         self.credentials = credentials
+
+    def put(self, itemType, item):
+        Bundle.put(self, itemType, item)
+        if item.needs_credentials():
+            for given_credential in self.credentials:
+                for needed_credential in item.needs_credentials():
+                    if needed_credential == given_credential.__name__:
+                        item.inject_credentials(credential)
 
     def get_metadata(self, identifier, scheme) -> Metadata:
         """ Get a metadata object for the RDP
@@ -153,6 +179,7 @@ class ZenodoRestService(Service):
     def __init__(self, endpoint):
         Service.__init__(self, endpoint)
         self.serviceCapacities.append(RetrieveData)
+        self.serviceCapacities.append(RetrieveDataHttpHeaders)
 
     @property
     def protocol(self):
@@ -161,6 +188,15 @@ class ZenodoRestService(Service):
     def download(source:str) -> bytes:
         r = requests.get(source)
         return r.content
+
+    def _get_files_sources(self, zenodoId) -> List[str]:
+        r = requests.get("{}/records/?q=recid:{}".format(self.endpoint, zenodoId))
+        restJson = r.json()
+        if not "hits" in restJson.keys():
+            raise ValueError("{} does not seem to be a valid zenodoId".format(zenodoId))
+        if restJson["hits"]["total"] != 1:
+            raise ValueError("{} does not unambiguously identify a zenodo record".format(zenodoId))
+        return restJson["hits"]["hits"][0]["files"]
 
     def get_data(self, zenodoId) -> Generator[Data, None, None]:
         """ Yields all Data objects of the RDP retrievable by the zenodo API
@@ -175,15 +211,14 @@ class ZenodoRestService(Service):
         Data
             Data objects for an RDP
         """
-        r = requests.get("{}/records/?q=recid:{}".format(self.endpoint, zenodoId))
-        restJson = r.json()
         # TODO caching
-        if not "hits" in restJson.keys():
-            raise ValueError("{} does not seem to be a valid zenodoId".format(zenodoId))
-        if restJson["hits"]["total"] != 1:
-            raise ValueError("{} does not unambiguously identify a zenodo record".format(zenodoId))
-        for data_item in restJson["hits"]["hits"][0]["files"]:
+        for data_item in self._get_files_sources(zenodoId):
             yield FileDataFactory.create(
                 LazyFile(data_item["links"]["self"], ZenodoRestService.download)
             )
+
+    def get_headers(self, zenodoId) -> Generator[Dict, None, None]:
+        for data_item in self._get_files_sources(zenodoId):
+            r = request.head(data_item["links"]["self"])
+            yield r.headers
 

@@ -305,4 +305,3 @@ def create_personOrInstitution_object_from_OrderedDict(p):
                or ni.get("@schemeURI", "").startswith("https://orcid.org"):
                 po.orcid = ni["#text"]
     return po
-
