@@ -418,6 +418,10 @@ def test_rdp_related_resources(mock_get):
     rdp = RdpFactory.create("10.5281/zenodo.badex5", "zenodo")
     assert len(rdp.metadata.relatedResources) == 1
 
+@mock.patch('requests.get', side_effect=mocked_requests_get)
+def test_rdp_zenodo_services(mock_get):
+    rdp = RdpFactory.create("10.5281/zenodo.3490396", "zenodo")
+    assert len(rdp.services) == 2
 
 @mock.patch('requests.get', side_effect=mocked_requests_get)
 def test_rdp_zenodo_data(mock_get):

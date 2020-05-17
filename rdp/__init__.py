@@ -60,6 +60,17 @@ class Rdp(object):
            self._metadata.put("metadata", self._services.get_metadata(self.pid, "metadata"))
         return self._metadata
 
+    @property
+    def services(self) -> ServiceBundle:
+        """ Getter for the ServiceBundle
+
+        Returns
+        -------
+        ServiceBundle
+            Bundle of services
+        """
+        return self._services
+
 class RdpFactory(object):
     """ Factory for RDPs (research data products)
 
