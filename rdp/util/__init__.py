@@ -8,9 +8,24 @@ class Bundle(object):
     """
     def __init__(self):
         self.payload = {}
+        self.index = 0
 
     def __len__(self):
         return len(self.payload.keys())
+
+    def __iter__(self):
+        self.index = 0
+        self.keys = list(self.payload.keys())
+        return self
+
+    def __next__(self):
+        if self.index >= len(self):
+            raise StopIteration
+        self.index += 1
+        return self.keys[self.index-1]
+
+    def items(self):
+        return self.payload.items()
 
     def put(self, itemType, item):
         self.payload[itemType] = item

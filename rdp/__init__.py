@@ -110,10 +110,10 @@ class ZenodoRdp(Rdp):
     def __init__(self, pid):
        super(ZenodoRdp, self).__init__(pid)
        self.zenodo_id = self.pid.split(".")[-1]
-       self._services.put(
+       self.services.put(
            "oai-pmh",
            OaipmhService("https://zenodo.org/oai2d", "oai:zenodo.org:"))
-       self._services.put(
+       self.services.put(
            "zenodo-rest-api",
            ZenodoRestService("https://zenodo.org/api")
        )
@@ -121,7 +121,7 @@ class ZenodoRdp(Rdp):
     @property
     def data(self):
         if len(self._data) < 1:
-            for f in self._services.get_data(self.zenodo_id):
+            for f in self.services.get_data(self.zenodo_id):
                 self._data.append(f)
         return self._data
 

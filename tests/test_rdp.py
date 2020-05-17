@@ -422,6 +422,13 @@ def test_rdp_related_resources(mock_get):
 def test_rdp_zenodo_services(mock_get):
     rdp = RdpFactory.create("10.5281/zenodo.3490396", "zenodo")
     assert len(rdp.services) == 2
+    services = ["oai-pmh", "zenodo-rest-api"]
+    for idx, service_name in enumerate(rdp.services):
+        if idx == 0:
+            assert service_name in services
+            services.remove(service_name)
+        if idx == 1:
+            assert service_name == services[0]
 
 @mock.patch('requests.get', side_effect=mocked_requests_get)
 def test_rdp_zenodo_data(mock_get):
