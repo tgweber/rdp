@@ -219,6 +219,6 @@ class ZenodoRestService(Service):
 
     def get_headers(self, zenodoId) -> Generator[Dict, None, None]:
         for data_item in self._get_files_sources(zenodoId):
-            r = request.head(data_item["links"]["self"])
+            r = requests.head(data_item["links"]["self"])
             yield r.headers
 
