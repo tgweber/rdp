@@ -8,12 +8,13 @@ with open('LICENSE') as f:
 
 setup(
     name='rdp',
-    version='0.0.5',
+    version='0.0.6',
     descripion='Research Data Product (Interface)',
     long_description=readme,
     author='Tobias Weber',
     author_email='mail@tgweber.de',
     url='https://github.com/tgweber/rdp',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    install_requires=["xmltodict", "requests", "textextract"]
 )
