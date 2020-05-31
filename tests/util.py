@@ -65,6 +65,8 @@ def mocked_requests_get(*args, **kwargs):
         with open("./tests/artefacts/md010.xml", "rb") as f:
             content = f.read()
         return _MockResponse(content, 200)
+    elif args[0] == "https://zenodo.org/oai2d" and args[1]["identifier"] == "oai:zenodo.org:exception1":
+        return _MockResponse({}, 404)
     elif args[0] == "https://zenodo.org/api/records/?q=recid:3490396":
         with open("./tests/artefacts/zenodo001.json", "r") as f:
             content = json.load(f)

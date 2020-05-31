@@ -16,6 +16,7 @@ from rdp.services.capacities import \
     ServiceCapacity
 from rdp.metadata.factory import MetadataFactory, Metadata
 from rdp.data import FileDataFactory, Data
+from rdp.exceptions import CannotCreateMetadataException
 from rdp.util import Bundle, LazyFile
 
 class Service(object):
@@ -160,6 +161,12 @@ class OaipmhService(Service):
             'identifier': "{}{}".format(self.identifierPrefix, identifier)
         }
         r = requests.get(self.endpoint, params)
+        if r.status_code >= 400:
+            raise CannotCreateMetadataException(
+                "Cannot create RDP with id {} via OAI-PMH; HTTP-Status-Code: {}".format(
+                    identifier, r.status_code
+                )
+            )
         md_type = "oaipmh_{}".format(metadataPrefix)
         return MetadataFactory.create(md_type, r.content)
 

@@ -4,3 +4,4 @@ pytest-cov
 requests
 textract
 xmltodict
+PyPDF2
