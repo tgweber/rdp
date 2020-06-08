@@ -8,7 +8,7 @@ with open('LICENSE') as f:
 
 setup(
     name='rdp',
-    version='0.0.9',
+    version='0.0.10',
     descripion='Research Data Product (Interface)',
     long_description=readme,
     author='Tobias Weber',

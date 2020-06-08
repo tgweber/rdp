@@ -269,7 +269,10 @@ def create_personOrInstitution_object_from_OrderedDict(p):
         everything
 
     """
-    nameField = p.get("creatorName", p.get("contributorName", None))
+    nameField = p.get("creatorName", p.get("contributorName", ""))
+    # None can also come from the first get call! Do not delete!
+    if nameField is None:
+        nameField = ""
     if isinstance(nameField, OrderedDict):
         if nameField.get("@nameType", None) == "Organizational":
             inst = PersonOrInstitution(nameField["#text"], False)
