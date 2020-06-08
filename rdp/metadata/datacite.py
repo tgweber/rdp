@@ -124,19 +124,20 @@ class DataCiteMetadata(OaiPmhMetadata):
             subjects = self.md["subjects"].get("subject")
             if isinstance(subjects, (str, OrderedDict)):
                 subjects = [ subjects ]
-            for s in subjects:
-                if s is None:
-                    continue
-                if isinstance(s, str):
-                    s = { "#text": s}
-                self._subjects.append(
-                    Subject(
-                        s.get("subject", s.get("#text")),
-                        s.get("@subjectScheme"),
-                        s.get("@schemeURI"),
-                        s.get("@valueURI")
+            if isinstance(subjects, list):
+                for s in subjects:
+                    if s is None:
+                        continue
+                    if isinstance(s, str):
+                        s = { "#text": s}
+                    self._subjects.append(
+                        Subject(
+                            s.get("subject", s.get("#text")),
+                            s.get("@subjectScheme"),
+                            s.get("@schemeURI"),
+                            s.get("@valueURI")
+                        )
                     )
-                )
         return self._subjects
 
     @property
